@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5D7F77F3-3FF9-48B2-AFF0-DF9EFB198D63}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>KerbalScienceInnovation</RootNamespace>
+    <AssemblyName>KerbalScienceInnovation</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>..\..\..\KSP\KSP_Data\Managed\Assembly-CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Assembly-CSharp-firstpass">
+      <HintPath>..\..\..\KSP\KSP_Data\Managed\Assembly-CSharp-firstpass.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UnityEngine">
+      <HintPath>..\..\..\KSP\KSP_Data\Managed\UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>..\..\..\KSP\KSP_Data\Managed\UnityEngine.UI.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="KSIGravityWaveModule.cs" />
+    <Compile Include="ModuleScienceExtended.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="en-us.cfg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy "$(TargetDir)KerbalScienceInnovation.dll"  "$(SolutionDir)\..\GameData\KSI\Plugins" /Y
+copy "$(TargetDir)en-us.cfg" "$(SolutionDir)\..\GameData\KSI\Localization" /Y
+(robocopy "$(SolutionDir)\..\GameData\KSI" "$(SolutionDir)\..\..\KSP\GameData\KSI"   /E /V) 
+(robocopy "$(SolutionDir)\..\GameData\KSI" "$(SolutionDir)\..\..\KSP en\GameData\KSI"   /E /V) 
+(robocopy "$(SolutionDir)\..\GameData\KSI" "$(SolutionDir)\..\..\KSP es\GameData\KSI"   /E /V) 
+(robocopy "$(SolutionDir)\..\GameData\KSI" "$(SolutionDir)\..\..\KSP ru\GameData\KSI"   /E /V) 
+(robocopy "$(SolutionDir)\..\GameData\KSI" "$(SolutionDir)\..\..\KSP jp\GameData\KSI"   /E /V) 
+(robocopy "$(SolutionDir)\..\GameData\KSI" "$(SolutionDir)\..\..\KSP zh\GameData\KSI"   /E /V) ^&amp;amp; exit 0</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>rd /s /q "$(SolutionDir)\..\..\KSP\GameData\KSI"
+rd /s /q "$(SolutionDir)\..\..\KSP en\GameData\KSI"
+rd /s /q "$(SolutionDir)\..\..\KSP es\GameData\KSI"
+rd /s /q "$(SolutionDir)\..\..\KSP ja\GameData\KSI"
+rd /s /q "$(SolutionDir)\..\..\KSP zh\GameData\KSI"
+rd /s /q "$(SolutionDir)\..\..\KSP ru\GameData\KSI"</PreBuildEvent>
+  </PropertyGroup>
+</Project>
