@@ -1,1 +1,1 @@
-# KSI-ScienceModules
+# Kerbal Science Innovation
