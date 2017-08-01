@@ -50,6 +50,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BodyUtils.cs" />
     <Compile Include="KSIGravityWaveModule.cs" />
     <Compile Include="ModuleScienceExtended.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

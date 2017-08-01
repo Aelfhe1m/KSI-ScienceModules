@@ -30,27 +30,31 @@ namespace KerbalScienceInnovation
         [KSPField]
         public float xmitBonus = 0f;
 
-        [KSPField]
+        [KSPField(isPersistant =true)]
         public bool isRunning;
 
-        [KSPField]
+        [KSPField(isPersistant =true)]
         public bool isFinished;
+
+        [KSPField]
+        public bool isResetable = false;
 
         public abstract void CreateExperimentResult();
         public abstract bool CanRunExperiment();
 
         void FixedUpdate()
         {
-            //if (CanRunExperiment())
-            //{
-            //    Events["StartExperiment"].active = true;
-            //    Actions["StartExperiment"].active = true;
-            //}
-            //else
-            //{
-            //    Events["StartExperiment"].active = false;
-            //    Actions["StartExperiment"].active = false;
-            //}
+            var canRun = CanRunExperiment();
+
+            if (isRunning || isFinished)
+                Events["StartExperiment"].active = false;
+            else
+                Events["StartExperiment"].active = true;
+
+            if (isFinished)
+                Events["GetResults"].active = true;
+            else
+                Events["GetResults"].active = false;
 
             Events["ReviewEvent"].active = storedData.Count > 0;
             Events["EVACollect"].active = storedData.Count > 0;
@@ -74,7 +78,7 @@ namespace KerbalScienceInnovation
             else
             {
                 var remaining = startTime + resultsDelay - Planetarium.GetUniversalTime();
-                timeRemaining = KSPUtil.dateTimeFormatter.PrintDateDelta(remaining, true, true, true);
+                timeRemaining = KSPUtil.dateTimeFormatter.PrintDateDeltaCompact(remaining, true, true, true);
             }
 
         }
@@ -92,6 +96,20 @@ namespace KerbalScienceInnovation
         }
 
         public abstract void RunExperiment(bool silent = false);
+
+        [KSPEvent(guiActive = true, guiName = "#KSI_GetResults", active = false)]
+        public void GetResults()
+        {
+            GetScience();
+        }
+
+        [KSPAction("#KSI_GetResults")]
+        public void GetResults(KSPActionParam param)
+        {
+            GetScience();
+        }
+
+        public abstract void GetScience(bool silent = false);
         
         [KSPEvent(guiActive = true, guiName = "#KSI_Review", active = false)]
         public void ReviewEvent()
@@ -174,7 +192,7 @@ namespace KerbalScienceInnovation
             ScienceData data = storedData[0];
             expDialog = ExperimentsResultDialog.DisplayResult(
                 new ExperimentResultDialogPage(
-                    part, data, xmitBase, xmitBonus, false, "", true, new ScienceLabSearch(vessel, data), DumpData, KeepData, TransmitData, SendToLab));
+                    part, data, xmitBase, xmitBonus, false, "", false, new ScienceLabSearch(vessel, data), DumpData, KeepData, TransmitData, SendToLab));
         }
 
         private void KeepData(ScienceData data)

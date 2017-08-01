@@ -9,15 +9,18 @@ using UnityEngine;
 namespace KerbalScienceInnovation
 {
 
-    //MODULE
-    //{
-        // name = KSIGravityWaveModule
-        // timeToCollect = 151200 // time between starting experiment and results available. Kerbin day is 21600 seconds
-        // fractionOfSoi = 0.9 // Pe and Ap must be > 90% of SOI radius
-        // inclination = 90 // polar orbit
-        // inclinationError = 2.5 // allow orbit inclination to be off by this number of degrees
-	
-    //}
+	//MODULE
+	//{
+	//	name = KSIGravityWaveModule
+    //  experimentId = KSIGravityWaveExperiment
+    //  isResetable = false // one experiment, one result. Send new probe for more.
+	//	resultsDelay = 151200 // 7 * 21600 = 7 Kerbal days
+	//	fractionOfSOI = 0.9 // for planets the minimum Ap/Pe will be fractionOfSOI * PlanetsSOI
+	//	inclination = 90 // polar orbit
+	//	allowedIncError = 2.5 // allow a small deviation from polar
+	//	minSolarOrbit = 75000000000;   // Jool Ap = 72 212 238 387m + SOI = 2 455 985 200
+	//	samplesInSolarOrbit = 2 // unless it's solar orbit then allow experiment to be run twice (north and south)
+	//}
 
 
 
@@ -38,11 +41,19 @@ public class KSIGravityWaveModule : ModuleScienceExtended
         [KSPField]
         public double allowedIncError = 2.5;
 
+        [KSPField]
+        public double minSolarOrbit = 75000000000;   // Jool Ap = 72 212 238 387m + SOI = 2 455 985 200
+
+        [KSPField]
+        public int samplesInSolarOrbit = 2;
+
+        [KSPField(isPersistant = true)]
+        public int solarSamplesCollected = 0;
+
         public override void OnStart(PartModule.StartState state)
         {
             base.OnStart(state);
 
-            
         }
 
         public override bool CanRunExperiment()
@@ -62,32 +73,54 @@ public class KSIGravityWaveModule : ModuleScienceExtended
             debugInfo.Append(", Inc: ");
             debugInfo.Append(vessel.orbit.inclination);
 
+            var body = vessel.mainBody;
+            var bodyType = BodyUtils.BodyType(body);
+
+            double minOrbit = 0;
+
+            if (bodyType == CelestialBodyType.MOON || bodyType == CelestialBodyType.NOT_APPLICABLE)
+            {
+                msg = "Body must be a sun or planet";
+                isOK = false;
+            }
+            else if (bodyType == CelestialBodyType.SUN)
+            {
+                minOrbit = minSolarOrbit;
+            }
+            else if (bodyType == CelestialBodyType.PLANET)
+            {
+                minOrbit = fractionOfSOI * body.sphereOfInfluence;
+            }
+
+
             // Debug.Log(debugInfo.ToString());
+            if (bodyType != CelestialBodyType.MOON && bodyType != CelestialBodyType.NOT_APPLICABLE)
+            {
+                if (vessel.orbit.PeA < minOrbit)
+                {
+                    msg += " " + Localizer.GetStringByTag("#KSI_Grav_PeTooLow") + " ";
+                    isOK = false;
+                }
+                if (vessel.orbit.ApA < minOrbit)
+                {
+                    msg += " " + Localizer.GetStringByTag("#KSI_Grav_ApTooLow") + " ";
+                    isOK = false;
+                }
+                if (vessel.orbit.ApA > body.sphereOfInfluence)
+                {
+                    msg += " " + Localizer.GetStringByTag("#KSI_Grav_ApTooHigh") + " ";
+                    isOK = false;
+                }
 
-            if (vessel.orbit.PeA < fractionOfSOI * vessel.mainBody.sphereOfInfluence)
-            {
-                msg += Localizer.GetStringByTag("#KSI_Grav_PeTooLow");
-                isOK = false;
-            }
-            if (vessel.orbit.ApA < fractionOfSOI * vessel.mainBody.sphereOfInfluence)
-            {
-                msg += Localizer.GetStringByTag("#KSI_Grav_ApTooLow");
-                isOK = false;
-            }
-            if (vessel.orbit.ApA > vessel.mainBody.sphereOfInfluence)
-            {
-                msg += Localizer.GetStringByTag("#KSI_Grav_ApTooHigh");
-                isOK = false;
-            }
-
-            if (vessel.orbit.inclination > inclination + allowedIncError || vessel.orbit.inclination < inclination - allowedIncError)
-            {
-                msg += Localizer.GetStringByTag("#KSI_Grav_IncWrong");
-                isOK = false;
+                if (vessel.orbit.inclination > inclination + allowedIncError || vessel.orbit.inclination < inclination - allowedIncError)
+                {
+                    msg += " " + Localizer.GetStringByTag("#KSI_Grav_IncWrong") + " ";
+                    isOK = false;
+                }
             }
 
             if (msg.Length == 0)
-                msg = Localizer.GetStringByTag("#KSI_Grav_OrbitOK");
+                msg = " " + Localizer.GetStringByTag("#KSI_Grav_OrbitOK") + " ";
 
             status = msg;
 
@@ -98,18 +131,38 @@ public class KSIGravityWaveModule : ModuleScienceExtended
         {
             if (!CanRunExperiment())
             {
-                ScreenMessages.PostScreenMessage(Localizer.Format("#KSI_Grav_RequiredOrbitMessage", (fractionOfSOI * vessel.mainBody.sphereOfInfluence).ToString("N0")), 5f, ScreenMessageStyle.UPPER_CENTER);
+                var bodyType = BodyUtils.BodyType(vessel.mainBody);
+                if (bodyType == CelestialBodyType.MOON || bodyType == CelestialBodyType.NOT_APPLICABLE)
+                {
+                    ScreenMessages.PostScreenMessage(Localizer.Format("#KSI_Grav_RequiredBodyMessage"), 5f, ScreenMessageStyle.UPPER_CENTER);
+                }
+                else if (bodyType == CelestialBodyType.SUN)
+                {
+                    ScreenMessages.PostScreenMessage(Localizer.Format("#KSI_Grav_RequiredOrbitMessage", minSolarOrbit.ToString("N0")), 5f, ScreenMessageStyle.UPPER_CENTER);
+                }
+                else if (bodyType == CelestialBodyType.PLANET)
+                {
+                    ScreenMessages.PostScreenMessage(Localizer.Format("#KSI_Grav_RequiredOrbitMessage", (fractionOfSOI * vessel.mainBody.sphereOfInfluence).ToString("N0")), 5f, ScreenMessageStyle.UPPER_CENTER);
+                }
+                
                 return;
             }
 
             if (!isRunning && !isFinished)
             {
-                ScreenMessages.PostScreenMessage(Localizer.GetStringByTag("#KSI_Grav_startedMessage"), 5f, ScreenMessageStyle.UPPER_CENTER);
+                var days = resultsDelay / KSPUtil.dateTimeFormatter.Day;
+                Debug.Log($"[KSI]: delay = {resultsDelay}, day = {KSPUtil.dateTimeFormatter.Day}, days = {days}");
+                ScreenMessages.PostScreenMessage(Localizer.Format("#KSI_Grav_startedMessage", days), 5f, ScreenMessageStyle.UPPER_CENTER);
                 isRunning = true;
                 startTime = Planetarium.GetUniversalTime();
                 return;
             }
 
+           
+        }
+
+        public override void GetScience(bool silent = false)
+        {
             if (isFinished)
                 CreateExperimentResult();
 
@@ -123,13 +176,35 @@ public class KSIGravityWaveModule : ModuleScienceExtended
             storedData.Clear();
             ScienceData data = null;
             ScienceExperiment experiment = ResearchAndDevelopment.GetExperiment(experimentId);
-            ScienceSubject subject = ResearchAndDevelopment.GetExperimentSubject(experiment, ExperimentSituations.InSpaceHigh, vessel.mainBody, "", "");
+            var biome = GetBiome();
+            var displayBiome = biome == "" ? "" : Localizer.GetStringByTag("" + biome);
+  
+            ScienceSubject subject = ResearchAndDevelopment.GetExperimentSubject(experiment, ExperimentSituations.InSpaceHigh, vessel.mainBody, biome, displayBiome);
+            float amount = experiment.baseValue * subject.dataScale;
+            data = new ScienceData(amount, xmitBase, xmitBonus, subject.id, subject.title, false, part.flightID);
 
-            
 
             if (data == null)
                 return;
             storedData.Add(data);
+        }
+
+        public string GetBiome()
+        {
+            if (!IsSolar())
+                return "";
+
+            var lat = (vessel.latitude + 180 + 90) % 180 - 90;
+            if (lat > 0)
+                return "NorthOfEcliptic";
+            else
+                return "SouthOfEcliptic";
+
+        }
+
+        public bool IsSolar()
+        {
+            return false;
         }
 
     }
