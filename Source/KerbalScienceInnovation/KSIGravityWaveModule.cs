@@ -196,9 +196,9 @@ public class KSIGravityWaveModule : ModuleScienceExtended
 
             var lat = (vessel.latitude + 180 + 90) % 180 - 90;
             if (lat > 0)
-                return "NorthOfEcliptic";
+                return "North";
             else
-                return "SouthOfEcliptic";
+                return "South";
 
         }
 
