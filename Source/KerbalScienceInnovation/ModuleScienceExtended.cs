@@ -39,8 +39,20 @@ namespace KerbalScienceInnovation
         [KSPField]
         public bool isResetable = false;
 
+        [KSPField]
+        public float interactionRange = 1.5f;
+
+        [KSPField]
+        public double powerConsumption = 10f;
+
         public abstract void CreateExperimentResult();
         public abstract bool CanRunExperiment();
+
+        public override void OnStart(PartModule.StartState state)
+        {
+            base.OnStart(state);
+            Events["EVACollect"].unfocusedRange = interactionRange;
+        }
 
         void FixedUpdate()
         {
@@ -55,6 +67,12 @@ namespace KerbalScienceInnovation
                 Events["GetResults"].active = true;
             else
                 Events["GetResults"].active = false;
+
+            if (isRunning)
+            {
+                // power consumption
+                RequestResource("ElectricCharge", TimeWarp.deltaTime * powerConsumption);
+            }
 
             Events["ReviewEvent"].active = storedData.Count > 0;
             Events["EVACollect"].active = storedData.Count > 0;
@@ -166,6 +184,21 @@ namespace KerbalScienceInnovation
             if (storedData.Contains(data))
                 storedData.Remove(data);
         }
+
+        private double ResourceAvailable(string resource)
+        {
+            var res = PartResourceLibrary.Instance.GetDefinition(resource);
+            double amount, maxAmount;
+            part.GetConnectedResourceTotals(res.id, out amount, out maxAmount);
+            return amount;
+        }
+
+        private float RequestResource(string resource, double amount)
+        {
+            var res = PartResourceLibrary.Instance.GetDefinition(resource);
+            return (float)this.part.RequestResource(res.id, amount);
+        }
+
 
         public ScienceData[] GetData() => storedData.ToArray();
 

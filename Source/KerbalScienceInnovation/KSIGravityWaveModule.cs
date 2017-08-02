@@ -48,10 +48,7 @@ namespace KerbalScienceInnovation
         [KSPField(isPersistant = true)]
         public int solarSamplesCollected = 0;
 
-        public override void OnStart(PartModule.StartState state)
-        {
-            base.OnStart(state);
-        }
+
 
         public override string GetInfo()
         {
@@ -162,6 +159,7 @@ namespace KerbalScienceInnovation
 
            
         }
+
 
         public override void GetScience(bool silent = false)
         {
