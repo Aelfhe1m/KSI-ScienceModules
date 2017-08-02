@@ -54,7 +54,7 @@ namespace KerbalScienceInnovation
 
         public override string GetInfo()
         {
-            return Localizer.Format("#KSI_Grav_EditorInfo", (fractionOfSOI * 100).ToString(), (minSolarOrbit / 1000).ToString("N0"), resultsDelay / KSPUtil.dateTimeFormatter.Day);
+            return Localizer.Format("#KSI_Grav_EditorInfo", (fractionOfSOI * 100).ToString(), (minSolarOrbit / 1000).ToString("N0"), resultsDelay / KSPUtil.dateTimeFormatter.Day, powerConsumption);
         }
 
         public override bool CanRunExperiment()
