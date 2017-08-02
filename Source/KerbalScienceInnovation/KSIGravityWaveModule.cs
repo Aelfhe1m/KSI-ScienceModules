@@ -19,12 +19,10 @@ namespace KerbalScienceInnovation
 	//	inclination = 90 // polar orbit
 	//	allowedIncError = 2.5 // allow a small deviation from polar
 	//	minSolarOrbit = 75000000000;   // Jool Ap = 72 212 238 387m + SOI = 2 455 985 200
-	//	samplesInSolarOrbit = 2 // unless it's solar orbit then allow experiment to be run twice (north and south)
+	//	samplesInSolarOrbit = 2 // if it's solar orbit then allow experiment to be run twice (north and south)
 	//}
-
-
-
-public class KSIGravityWaveModule : ModuleScienceExtended
+    
+    public class KSIGravityWaveModule : ModuleScienceExtended
     {
         [KSPField]
         public string experimentId = "KSIGravityWaveExperiment";
@@ -53,7 +51,11 @@ public class KSIGravityWaveModule : ModuleScienceExtended
         public override void OnStart(PartModule.StartState state)
         {
             base.OnStart(state);
+        }
 
+        public override string GetInfo()
+        {
+            return Localizer.Format("#KSI_Grav_EditorInfo", (fractionOfSOI * 100).ToString(), (minSolarOrbit / 1000).ToString("N0"), resultsDelay / KSPUtil.dateTimeFormatter.Day);
         }
 
         public override bool CanRunExperiment()
