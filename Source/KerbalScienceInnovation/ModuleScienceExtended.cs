@@ -47,6 +47,7 @@ namespace KerbalScienceInnovation
 
         public abstract void CreateExperimentResult();
         public abstract bool CanRunExperiment();
+        public abstract void OnNoPower();
 
         public override void OnStart(PartModule.StartState state)
         {
@@ -71,7 +72,11 @@ namespace KerbalScienceInnovation
             if (isRunning)
             {
                 // power consumption
-                RequestResource("ElectricCharge", TimeWarp.deltaTime * powerConsumption);
+                var required = TimeWarp.deltaTime * powerConsumption;
+                if (ResourceAvailable("ElectricCharge") > required)
+                    RequestResource("ElectricCharge", required);
+                else
+                    OnNoPower();
             }
 
             Events["ReviewEvent"].active = storedData.Count > 0;
@@ -84,7 +89,7 @@ namespace KerbalScienceInnovation
 
         void UpdateTimeRemaining()
         {
-            if (startTime == 0 || !isRunning)
+            if (startTime == 0)
                 return;
 
             if (Planetarium.GetUniversalTime() > startTime + resultsDelay)

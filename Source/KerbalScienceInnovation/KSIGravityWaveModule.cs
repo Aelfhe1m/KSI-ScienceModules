@@ -48,6 +48,8 @@ namespace KerbalScienceInnovation
         [KSPField(isPersistant = true)]
         public int solarSamplesCollected = 0;
 
+        [KSPField]
+        public double solarScienceMultiplier = 1;
 
 
         public override string GetInfo()
@@ -208,5 +210,13 @@ namespace KerbalScienceInnovation
             return (bodyType == CelestialBodyType.SUN);
         }
 
+        public override void OnNoPower()
+        {
+            // reset experiment
+            ScreenMessages.PostScreenMessage(Localizer.GetStringByTag("#KSI_Grav_OutOfPowerMessage"), 5f, ScreenMessageStyle.UPPER_CENTER);
+            isRunning = false;
+            isFinished = false;
+            startTime = 0;
+        }
     }
 }
