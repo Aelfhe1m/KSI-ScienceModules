@@ -177,7 +177,7 @@ public class KSIGravityWaveModule : ModuleScienceExtended
             ScienceData data = null;
             ScienceExperiment experiment = ResearchAndDevelopment.GetExperiment(experimentId);
             var biome = GetBiome();
-            var displayBiome = biome == "" ? "" : Localizer.GetStringByTag("" + biome);
+            var displayBiome = biome == "" ? "" : Localizer.GetStringByTag("#KSI_Biome_" + biome);
   
             ScienceSubject subject = ResearchAndDevelopment.GetExperimentSubject(experiment, ExperimentSituations.InSpaceHigh, vessel.mainBody, biome, displayBiome);
             float amount = experiment.baseValue * subject.dataScale;
@@ -204,7 +204,8 @@ public class KSIGravityWaveModule : ModuleScienceExtended
 
         public bool IsSolar()
         {
-            return false;
+            var bodyType = BodyUtils.BodyType(vessel.mainBody);
+            return (bodyType == CelestialBodyType.SUN);
         }
 
     }
