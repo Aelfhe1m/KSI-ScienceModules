@@ -49,7 +49,7 @@ namespace KerbalScienceInnovation
         public int solarSamplesCollected = 0;
 
         [KSPField]
-        public double solarScienceMultiplier = 1;
+        public float solarScienceMultiplier = 1;
 
 
         public override string GetInfo()
@@ -183,6 +183,7 @@ namespace KerbalScienceInnovation
   
             ScienceSubject subject = ResearchAndDevelopment.GetExperimentSubject(experiment, ExperimentSituations.InSpaceHigh, vessel.mainBody, biome, displayBiome);
             float amount = experiment.baseValue * subject.dataScale;
+            amount = (IsSolar()) ? amount * solarScienceMultiplier : amount;
             data = new ScienceData(amount, xmitBase, xmitBonus, subject.id, subject.title, false, part.flightID);
 
 
