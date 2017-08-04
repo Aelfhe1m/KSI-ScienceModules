@@ -65,6 +65,8 @@
     <PostBuildEvent>copy "$(TargetDir)KerbalScienceInnovation.dll"  "$(SolutionDir)\..\GameData\KSI\Plugins" /Y
 copy "$(TargetDir)en-us.cfg" "$(SolutionDir)\..\GameData\KSI\Localization" /Y
 (robocopy "$(SolutionDir)\..\GameData\KSI" "$(SolutionDir)\..\..\KSP\GameData\KSI"   /E /V) 
+(robocopy "$(SolutionDir)\..\GameData\ContractPacks" "$(SolutionDir)\..\..\KSP\GameData\ContractPacks"   /E /V) 
+
 (robocopy "$(SolutionDir)\..\GameData\KSI" "$(SolutionDir)\..\..\KSP en\GameData\KSI"   /E /V) 
 (robocopy "$(SolutionDir)\..\GameData\KSI" "$(SolutionDir)\..\..\KSP es\GameData\KSI"   /E /V) 
 (robocopy "$(SolutionDir)\..\GameData\KSI" "$(SolutionDir)\..\..\KSP ru\GameData\KSI"   /E /V) 
@@ -73,10 +75,16 @@ copy "$(TargetDir)en-us.cfg" "$(SolutionDir)\..\GameData\KSI\Localization" /Y
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>rd /s /q "$(SolutionDir)\..\..\KSP\GameData\KSI"
+rd /s /q "$(SolutionDir)\..\..\KSP\GameData\ContractPacks"
 rd /s /q "$(SolutionDir)\..\..\KSP en\GameData\KSI"
+rd /s /q "$(SolutionDir)\..\..\KSP en\GameData\ContractPacks"
 rd /s /q "$(SolutionDir)\..\..\KSP es\GameData\KSI"
+rd /s /q "$(SolutionDir)\..\..\KSP es\GameData\ContractPacks"
 rd /s /q "$(SolutionDir)\..\..\KSP ja\GameData\KSI"
+rd /s /q "$(SolutionDir)\..\..\KSP ja\GameData\ContractPacks"
 rd /s /q "$(SolutionDir)\..\..\KSP zh\GameData\KSI"
-rd /s /q "$(SolutionDir)\..\..\KSP ru\GameData\KSI"</PreBuildEvent>
+rd /s /q "$(SolutionDir)\..\..\KSP zh\GameData\ContractPacks"
+rd /s /q "$(SolutionDir)\..\..\KSP ru\GameData\KSI"
+rd /s /q "$(SolutionDir)\..\..\KSP ru\GameData\ContractPacks"</PreBuildEvent>
   </PropertyGroup>
 </Project>
