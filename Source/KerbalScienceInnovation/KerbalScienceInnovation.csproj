@@ -56,33 +56,26 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Target Name="AfterBuild">
-    <Copy SourceFiles="$(TargetDir)KerbalScienceInnovation.dll" DestinationFolder="$(SolutionDir)\..\GameData\KSI\Plugins\" OverwriteReadOnlyFiles="true" SkipUnchangedFiles="false" />
-  </Target>
-  <Target Name="AfterBuild">
-    <Copy SourceFiles="$(SolutionDir)\..\GameData\KSI\*.*" DestinationFolder="$(SolutionDir)\..\..\KSP\GameData\KSI\" OverwriteReadOnlyFiles="true" SkipUnchangedFiles="false" />
-  </Target>
   <PropertyGroup>
     <PostBuildEvent>copy "$(TargetDir)KerbalScienceInnovation.dll"  "$(SolutionDir)\..\GameData\KSI\Plugins" /Y
 
-(robocopy "$(SolutionDir)\..\GameData\KSI" "$(SolutionDir)\..\..\KSP\GameData\KSI"   /E /V)  ^&amp;amp; 
-(robocopy "$(SolutionDir)\..\GameData\ContractPacks" "$(SolutionDir)\..\..\KSP\GameData\ContractPacks"   /E /V) ^&amp;amp;  
+(robocopy "$(SolutionDir)\..\GameData\KSI" "$(SolutionDir)\..\..\KSP\GameData\KSI"   /E /V)
+(robocopy "$(SolutionDir)\..\GameData\ContractPacks" "$(SolutionDir)\..\..\KSP\GameData\ContractPacks"   /E /V) 
 
-(robocopy "$(SolutionDir)\..\GameData\KSI" "$(SolutionDir)\..\..\KSP en\GameData\KSI"   /E /V)  ^&amp;amp; 
-(robocopy "$(SolutionDir)\..\GameData\ContractPacks" "$(SolutionDir)\..\..\KSP\GameData\ContractPacks"   /E /V)  ^&amp;amp; 
+(robocopy "$(SolutionDir)\..\GameData\KSI" "$(SolutionDir)\..\..\KSP en\GameData\KSI"   /E /V) 
+(robocopy "$(SolutionDir)\..\GameData\ContractPacks" "$(SolutionDir)\..\..\KSP\GameData\ContractPacks"   /E /V) 
 
-(robocopy "$(SolutionDir)\..\GameData\KSI" "$(SolutionDir)\..\..\KSP es\GameData\KSI"   /E /V)  ^&amp;amp; 
-(robocopy "$(SolutionDir)\..\GameData\ContractPacks" "$(SolutionDir)\..\..\KSP\GameData\ContractPacks"   /E /V)  ^&amp;amp; 
+(robocopy "$(SolutionDir)\..\GameData\KSI" "$(SolutionDir)\..\..\KSP es\GameData\KSI"   /E /V) 
+(robocopy "$(SolutionDir)\..\GameData\ContractPacks" "$(SolutionDir)\..\..\KSP\GameData\ContractPacks"   /E /V) 
 
-(robocopy "$(SolutionDir)\..\GameData\KSI" "$(SolutionDir)\..\..\KSP ru\GameData\KSI"   /E /V)  ^&amp;amp; 
-(robocopy "$(SolutionDir)\..\GameData\ContractPacks" "$(SolutionDir)\..\..\KSP\GameData\ContractPacks"   /E /V)  ^&amp;amp; 
+(robocopy "$(SolutionDir)\..\GameData\KSI" "$(SolutionDir)\..\..\KSP ru\GameData\KSI"   /E /V) 
+(robocopy "$(SolutionDir)\..\GameData\ContractPacks" "$(SolutionDir)\..\..\KSP\GameData\ContractPacks"   /E /V) 
 
-(robocopy "$(SolutionDir)\..\GameData\KSI" "$(SolutionDir)\..\..\KSP jp\GameData\KSI"   /E /V)  ^&amp;amp; 
-(robocopy "$(SolutionDir)\..\GameData\ContractPacks" "$(SolutionDir)\..\..\KSP\GameData\ContractPacks"   /E /V)  ^&amp;amp; 
+(robocopy "$(SolutionDir)\..\GameData\KSI" "$(SolutionDir)\..\..\KSP jp\GameData\KSI"   /E /V) 
+(robocopy "$(SolutionDir)\..\GameData\ContractPacks" "$(SolutionDir)\..\..\KSP\GameData\ContractPacks"   /E /V) 
 
-(robocopy "$(SolutionDir)\..\GameData\KSI" "$(SolutionDir)\..\..\KSP zh\GameData\KSI"   /E /V) ^&amp;amp; 
-(robocopy "$(SolutionDir)\..\GameData\ContractPacks" "$(SolutionDir)\..\..\KSP\GameData\ContractPacks"   /E /V)  ^&amp;amp; 
-exit 0</PostBuildEvent>
+(robocopy "$(SolutionDir)\..\GameData\KSI" "$(SolutionDir)\..\..\KSP zh\GameData\KSI"   /E /V)
+(robocopy "$(SolutionDir)\..\GameData\ContractPacks" "$(SolutionDir)\..\..\KSP\GameData\ContractPacks"   /E /V)  ^&amp;amp; exit 0</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>rd /s /q "$(SolutionDir)\..\..\KSP\GameData\KSI"

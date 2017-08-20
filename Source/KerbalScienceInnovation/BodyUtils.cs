@@ -4,8 +4,7 @@ using System.Linq;
 using System.Text;
 
 // based on code from https://github.com/jrossignol/ContractConfigurator/source/ContractConfigurator/ExpressionParser/Parsers/Classes/CelestialBodyParser.cs
-// Contract Configurator is licensed under the MIT license
-
+// Contract Configurator is licensed under the MIT license 
 
 namespace KerbalScienceInnovation
 {
