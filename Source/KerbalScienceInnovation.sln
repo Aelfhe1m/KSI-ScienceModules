@@ -24,32 +24,32 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Patches", "Patches", "{ACCE
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AtomicFountain", "AtomicFountain", "{67F39B80-1FC4-4855-A456-12750D4191FF}"
 	ProjectSection(SolutionItems) = preProject
-		..\GameData\KSI\Parts\Science\AtomicFountain (Caesium 133)\AF.cfg = ..\GameData\KSI\Parts\Science\AtomicFountain (Caesium 133)\AF.cfg
-		..\GameData\KSI\Parts\Science\AtomicFountain (Caesium 133)\HORLOGE.tga = ..\GameData\KSI\Parts\Science\AtomicFountain (Caesium 133)\HORLOGE.tga
-		..\GameData\KSI\Parts\Science\AtomicFountain (Caesium 133)\HorlogeCezium.mu = ..\GameData\KSI\Parts\Science\AtomicFountain (Caesium 133)\HorlogeCezium.mu
-		..\GameData\KSI\Parts\Science\AtomicFountain (Caesium 133)\UVMap.tga = ..\GameData\KSI\Parts\Science\AtomicFountain (Caesium 133)\UVMap.tga
+		..\GameData\KSI\Parts\Science\AtomicFountain\AF.cfg = ..\GameData\KSI\Parts\Science\AtomicFountain\AF.cfg
+		..\GameData\KSI\Parts\Science\AtomicFountain\HORLOGE.tga = ..\GameData\KSI\Parts\Science\AtomicFountain\HORLOGE.tga
+		..\GameData\KSI\Parts\Science\AtomicFountain\HorlogeCezium.mu = ..\GameData\KSI\Parts\Science\AtomicFountain\HorlogeCezium.mu
+		..\GameData\KSI\Parts\Science\AtomicFountain\UVMap.tga = ..\GameData\KSI\Parts\Science\AtomicFountain\UVMap.tga
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DarkMatterCollector", "DarkMatterCollector", "{70F97DE1-5DB1-4B55-8FCF-5D09EC2B8958}"
 	ProjectSection(SolutionItems) = preProject
-		..\GameData\KSI\Parts\Science\Dark matter collector\DMC.cfg = ..\GameData\KSI\Parts\Science\Dark matter collector\DMC.cfg
-		..\GameData\KSI\Parts\Science\Dark matter collector\DMC.mu = ..\GameData\KSI\Parts\Science\Dark matter collector\DMC.mu
-		..\GameData\KSI\Parts\Science\Dark matter collector\NRM_DMC.tga = ..\GameData\KSI\Parts\Science\Dark matter collector\NRM_DMC.tga
-		..\GameData\KSI\Parts\Science\Dark matter collector\UVmapDMC.tga = ..\GameData\KSI\Parts\Science\Dark matter collector\UVmapDMC.tga
+		..\GameData\KSI\Parts\Science\DarkMatterCollector\DMC.cfg = ..\GameData\KSI\Parts\Science\DarkMatterCollector\DMC.cfg
+		..\GameData\KSI\Parts\Science\DarkMatterCollector\DMC.mu = ..\GameData\KSI\Parts\Science\DarkMatterCollector\DMC.mu
+		..\GameData\KSI\Parts\Science\DarkMatterCollector\NRM_DMC.tga = ..\GameData\KSI\Parts\Science\DarkMatterCollector\NRM_DMC.tga
+		..\GameData\KSI\Parts\Science\DarkMatterCollector\UVmapDMC.tga = ..\GameData\KSI\Parts\Science\DarkMatterCollector\UVmapDMC.tga
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DarkMatterSensor", "DarkMatterSensor", "{131FC802-51A8-48C4-B90F-3C48B08C2CB3}"
 	ProjectSection(SolutionItems) = preProject
-		..\GameData\KSI\Parts\Science\Dark matter sensor\DarkMatterSensor.mu = ..\GameData\KSI\Parts\Science\Dark matter sensor\DarkMatterSensor.mu
-		..\GameData\KSI\Parts\Science\Dark matter sensor\DMS.cfg = ..\GameData\KSI\Parts\Science\Dark matter sensor\DMS.cfg
-		..\GameData\KSI\Parts\Science\Dark matter sensor\UVMapDarkMatterSensortexture.tga = ..\GameData\KSI\Parts\Science\Dark matter sensor\UVMapDarkMatterSensortexture.tga
+		..\GameData\KSI\Parts\Science\DarkMatterSensor\DarkMatterSensor.mu = ..\GameData\KSI\Parts\Science\DarkMatterSensor\DarkMatterSensor.mu
+		..\GameData\KSI\Parts\Science\DarkMatterSensor\DMS.cfg = ..\GameData\KSI\Parts\Science\DarkMatterSensor\DMS.cfg
+		..\GameData\KSI\Parts\Science\DarkMatterSensor\UVMapDarkMatterSensortexture.tga = ..\GameData\KSI\Parts\Science\DarkMatterSensor\UVMapDarkMatterSensortexture.tga
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GravityWaveSensor", "GravityWaveSensor", "{96DA1898-F7E4-4A23-965B-74860A0379EA}"
 	ProjectSection(SolutionItems) = preProject
-		..\GameData\KSI\Parts\Science\Gravity waves sensor\GWS.cfg = ..\GameData\KSI\Parts\Science\Gravity waves sensor\GWS.cfg
-		..\GameData\KSI\Parts\Science\Gravity waves sensor\LISA.mu = ..\GameData\KSI\Parts\Science\Gravity waves sensor\LISA.mu
-		..\GameData\KSI\Parts\Science\Gravity waves sensor\LISA.tga = ..\GameData\KSI\Parts\Science\Gravity waves sensor\LISA.tga
+		..\GameData\KSI\Parts\Science\GravityWavesSensor\GWS.cfg = ..\GameData\KSI\Parts\Science\GravityWavesSensor\GWS.cfg
+		..\GameData\KSI\Parts\Science\GravityWavesSensor\LISA.mu = ..\GameData\KSI\Parts\Science\GravityWavesSensor\LISA.mu
+		..\GameData\KSI\Parts\Science\GravityWavesSensor\LISA.tga = ..\GameData\KSI\Parts\Science\GravityWavesSensor\LISA.tga
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ContractPacks", "ContractPacks", "{A374A360-1954-4658-8B25-13631EA71F77}"
