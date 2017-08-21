@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.14
+VisualStudioVersion = 15.0.26730.8
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KerbalScienceInnovation", "KerbalScienceInnovation\KerbalScienceInnovation.csproj", "{5D7F77F3-3FF9-48B2-AFF0-DF9EFB198D63}"
 EndProject
@@ -56,6 +56,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ContractPacks", "ContractPa
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "KSI", "KSI", "{937DAD0C-C624-42C2-A74D-44D203ED4EB4}"
 	ProjectSection(SolutionItems) = preProject
+		..\GameData\ContractPacks\KSI\DarkMatterCollectionSun.cfg = ..\GameData\ContractPacks\KSI\DarkMatterCollectionSun.cfg
 		..\GameData\ContractPacks\KSI\GravityWaveExperiment.cfg = ..\GameData\ContractPacks\KSI\GravityWaveExperiment.cfg
 		..\GameData\ContractPacks\KSI\GravityWaveExperimentPlanets.cfg = ..\GameData\ContractPacks\KSI\GravityWaveExperimentPlanets.cfg
 		..\GameData\ContractPacks\KSI\GravityWaveExperimentSun.cfg = ..\GameData\ContractPacks\KSI\GravityWaveExperimentSun.cfg
@@ -72,6 +73,12 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Localization", "Localization", "{55EBC633-6C93-48A5-A3E3-5BD55BE79A09}"
 	ProjectSection(SolutionItems) = preProject
 		..\GameData\KSI\Localization\en-us.cfg = ..\GameData\KSI\Localization\en-us.cfg
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Localization", "Localization", "{09DDDF1C-2FD4-46DE-AAD7-7836F69AB93F}"
+	ProjectSection(SolutionItems) = preProject
+		..\GameData\ContractPacks\KSI\Localization\en-es.cfg = ..\GameData\ContractPacks\KSI\Localization\en-es.cfg
+		..\GameData\ContractPacks\KSI\Localization\en-us.cfg = ..\GameData\ContractPacks\KSI\Localization\en-us.cfg
 	EndProjectSection
 EndProject
 Global
@@ -101,5 +108,9 @@ Global
 		{937DAD0C-C624-42C2-A74D-44D203ED4EB4} = {A374A360-1954-4658-8B25-13631EA71F77}
 		{AC02AD8A-262A-4A69-9E64-91CDC82337A9} = {937DAD0C-C624-42C2-A74D-44D203ED4EB4}
 		{55EBC633-6C93-48A5-A3E3-5BD55BE79A09} = {8F7A3447-E016-4D30-86BA-B66A105EC9DB}
+		{09DDDF1C-2FD4-46DE-AAD7-7836F69AB93F} = {937DAD0C-C624-42C2-A74D-44D203ED4EB4}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CC2D05D3-D343-4742-8504-2340824C9317}
 	EndGlobalSection
 EndGlobal
