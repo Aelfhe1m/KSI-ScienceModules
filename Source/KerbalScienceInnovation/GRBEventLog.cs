@@ -54,6 +54,7 @@ namespace KerbalScienceInnovation
                 RA = 100.52,
                 Dec = -27.34
             };
+            events.Add(evt);
             return evt;
         }
 

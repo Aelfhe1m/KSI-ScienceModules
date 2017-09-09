@@ -60,7 +60,7 @@
     <Compile Include="KSIGravityWaveModule.cs" />
     <Compile Include="KSIParameters.cs" />
     <Compile Include="KSIParametersGRB.cs" />
-    <Compile Include="KSI_GRB_Scenario.cs" />
+    <Compile Include="KSIScenario.cs" />
     <Compile Include="MainWindow.cs" />
     <Compile Include="ModuleScienceExtended.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

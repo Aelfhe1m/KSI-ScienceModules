@@ -6,7 +6,7 @@ using System.Text;
 namespace KerbalScienceInnovation
 {
     [KSPScenario(ScenarioCreationOptions.AddToAllGames, GameScenes.SPACECENTER, GameScenes.FLIGHT)]
-    public class KSI_GRB_Scenario : ScenarioModule
+    public class KSIScenario : ScenarioModule
     {
         public override void OnLoad(ConfigNode node)
         {
