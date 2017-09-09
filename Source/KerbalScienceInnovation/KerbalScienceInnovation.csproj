@@ -53,9 +53,14 @@
     <Compile Include="BodyUtils.cs" />
     <Compile Include="AppLauncherButton.cs" />
     <Compile Include="Extensions\TooltipExtensions.cs" />
+    <Compile Include="GRBEvent.cs" />
+    <Compile Include="GRBEventController.cs" />
+    <Compile Include="GRBEventLog.cs" />
+    <Compile Include="GRBMessageBox.cs" />
     <Compile Include="KSIGravityWaveModule.cs" />
     <Compile Include="KSIParameters.cs" />
     <Compile Include="KSIParametersGRB.cs" />
+    <Compile Include="KSI_GRB_Scenario.cs" />
     <Compile Include="MainWindow.cs" />
     <Compile Include="ModuleScienceExtended.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
