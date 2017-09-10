@@ -21,7 +21,7 @@ namespace KerbalScienceInnovation
 
         public override int SectionOrder => 1;
 
-        public override GameParameters.GameMode GameMode => GameParameters.GameMode.SCIENCE | GameParameters.GameMode.CAREER;
+        public override GameParameters.GameMode GameMode => GameParameters.GameMode.ANY;
 
         // TODO: Add presets for game difficulties
         public override bool HasPresets => false;
