@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KSP.Localization;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,7 @@ namespace KerbalScienceInnovation
         private static GRBEventLog instance;
         private static List<GRBEvent> events = new List<GRBEvent>();
         private bool _loaded = false;
+        private double _latestEventTime = 0;
 
         public bool Loaded => _loaded;
 
@@ -45,6 +47,8 @@ namespace KerbalScienceInnovation
             Debug.Log($"[KSI]: saved {events.Count} GRB events to scenario");
         }
 
+        public double LatestEventTime => _latestEventTime;
+
         internal GRBEvent NewEvent()
         {
             var evt = new GRBEvent {
@@ -55,6 +59,15 @@ namespace KerbalScienceInnovation
                 Dec = -27.34
             };
             events.Add(evt);
+            if (evt.UT > _latestEventTime)
+                _latestEventTime = evt.UT;
+
+            
+            var delta = 100.0f; // TODO: calc amount of science to award for new GRB discovery
+            ResearchAndDevelopment.Instance.AddScience(delta, TransactionReasons.Progression);
+
+            ScreenMessages.PostScreenMessage(Localizer.Format("#KSI_GRB_DiscoveryScienceMessage", delta), 5f, ScreenMessageStyle.UPPER_CENTER);
+
             return evt;
         }
 
@@ -62,15 +75,19 @@ namespace KerbalScienceInnovation
         {
             events.Clear();
             var evtsNode = node.GetNode("GRBEvents");
-            foreach (var evt in evtsNode.GetNodes("Event"))
+            foreach (var nd in evtsNode.GetNodes("Event"))
             {
-                events.Add(new GRBEvent {
-                    ImageUrl = evt.GetValue("image"),
-                    Message = evt.GetValue("msg"),
-                    UT = double.Parse(evt.GetValue("ut")),
-                    RA = double.Parse(evt.GetValue("ra")),
-                    Dec = double.Parse(evt.GetValue("dec"))
-                });
+                var evt = new GRBEvent
+                {
+                    ImageUrl = nd.GetValue("image"),
+                    Message = nd.GetValue("msg"),
+                    UT = double.Parse(nd.GetValue("ut")),
+                    RA = double.Parse(nd.GetValue("ra")),
+                    Dec = double.Parse(nd.GetValue("dec"))
+                };
+                if (evt.UT > _latestEventTime)
+                    _latestEventTime = evt.UT;
+                events.Add(evt);
             }
             _loaded = true;
             Debug.Log($"[KSI]: loaded {events.Count} GRB events from scenario");

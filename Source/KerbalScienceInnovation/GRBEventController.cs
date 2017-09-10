@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,13 +14,69 @@ namespace KerbalScienceInnovation
         private double waitInterval;
         private bool loaded;
 
+        private GRBMessageBox view;
+
+
         public void Start()
         {
-            waitInterval = 60 * 60 * 10; // 10 hours for testing
+            DontDestroyOnLoad(this);
+            waitInterval = 60 * 60 * 100; // 100 hours for testing
+
+            GameEvents.onHideUI.Add(OnHideUI);
+            GameEvents.onShowUI.Add(OnShowUI);
+            GameEvents.onGamePause.Add(OnGamePause);
+            GameEvents.onGameUnpause.Add(OnGameUnpause);
+
+            StartCoroutine("WaitForEventLogLoaded");
+        }
+
+        public void OnDestroy()
+        {
+            GameEvents.onHideUI.Remove(OnHideUI);
+            GameEvents.onShowUI.Remove(OnShowUI);
+            GameEvents.onGamePause.Remove(OnGamePause);
+            GameEvents.onGameUnpause.Remove(OnGameUnpause);
+        }
+
+        public void OnGamePause()
+        {
+            if (view != null)
+                view.Dismiss();
+        }
+
+        public void OnGameUnpause()
+        {
+            if (view != null)
+                view.Show();
+        }
+
+        /// <summary>
+		/// Hide UI.
+		/// </summary>
+		private void OnHideUI()
+        {
+            if (view != null)
+                view.Dismiss();
+        }
+
+        /// <summary>
+        /// Show UI.
+        /// </summary>
+        private void OnShowUI()
+        {
+            if (view != null)
+                view.Dismiss();
+        }
+
+        public IEnumerator WaitForEventLogLoaded()
+        {
+            while (!GRBEventLog.Instance.Loaded)
+                yield return null;
+
+            lastEvent = GRBEventLog.Instance.LatestEventTime;
             loaded = true;
         }
 
-        private GRBMessageBox view;
 
         public void FixedUpdate()
         {
