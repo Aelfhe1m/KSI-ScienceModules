@@ -25,6 +25,10 @@ namespace KerbalScienceInnovation
         {
             GameEvents.onGUIApplicationLauncherReady.Add(AddLauncherButton);
             GameEvents.onGUIApplicationLauncherDestroyed.Add(RemoveLauncherButton);
+            GameEvents.onHideUI.Add(OnHideUI);
+            GameEvents.onShowUI.Add(OnShowUI);
+            GameEvents.onGamePause.Add(OnGamePause);
+            GameEvents.onGameUnpause.Add(OnGameUnpause);
         }
 
         public void OnDisable()
@@ -32,6 +36,44 @@ namespace KerbalScienceInnovation
             GameEvents.onGUIApplicationLauncherReady.Remove(AddLauncherButton);
             GameEvents.onGUIApplicationLauncherDestroyed.Remove(RemoveLauncherButton);
             RemoveLauncherButton();
+        }
+
+        public void OnDestroy()
+        {
+            GameEvents.onHideUI.Remove(OnHideUI);
+            GameEvents.onShowUI.Remove(OnShowUI);
+            GameEvents.onGamePause.Remove(OnGamePause);
+            GameEvents.onGameUnpause.Remove(OnGameUnpause);
+        }
+
+        public void OnGamePause()
+        {
+            if (view != null)
+                view.Dismiss();
+        }
+
+        public void OnGameUnpause()
+        {
+            if (view != null)
+                view.Show();
+        }
+
+        /// <summary>
+		/// Hide UI.
+		/// </summary>
+		private void OnHideUI()
+        {
+            if (view != null)
+                view.Dismiss();
+        }
+
+        /// <summary>
+        /// Show UI.
+        /// </summary>
+        private void OnShowUI()
+        {
+            if (view != null)
+                view.Dismiss();
         }
 
         private void AddLauncherButton()
