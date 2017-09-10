@@ -62,6 +62,7 @@
     <Compile Include="KSIParametersGRB.cs" />
     <Compile Include="KSIScenario.cs" />
     <Compile Include="MainWindow.cs" />
+    <Compile Include="KSIGammaRayBurstDetector.cs" />
     <Compile Include="ModuleScienceExtended.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
