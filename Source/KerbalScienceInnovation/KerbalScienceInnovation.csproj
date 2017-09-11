@@ -57,6 +57,7 @@
     <Compile Include="GRBEventController.cs" />
     <Compile Include="GRBEventLog.cs" />
     <Compile Include="GRBMessageBox.cs" />
+    <Compile Include="KSIGammaRayBurstFollowUpExperiment.cs" />
     <Compile Include="KSIGravityWaveModule.cs" />
     <Compile Include="KSIParameters.cs" />
     <Compile Include="KSIParametersGRB.cs" />
